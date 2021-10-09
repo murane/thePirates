@@ -21,7 +21,6 @@ public class ProductOption {
 
     private Integer stock;
 
-    @Column(nullable = false)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Product product;
 
