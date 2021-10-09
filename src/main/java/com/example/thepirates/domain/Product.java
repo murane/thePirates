@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Entity
 @Getter
@@ -23,31 +24,44 @@ public class Product {
 
     private String description;
 
-    private Integer deliveryFee;
+    @Embedded
+    private Delivery delivery;
 
-    private DeliveryType deliveryType;
+    private LocalTime supplierOpen;
 
-    private LocalDateTime closing;
+    private LocalTime supplierClose;
 
     @OneToMany(fetch = FetchType.LAZY, orphanRemoval = true)
     private List<ProductOption> productOptions = new ArrayList<>();
 
     @Builder
     public Product(Long id, String name, String description, Integer deliveryFee,
-                   DeliveryType deliveryType, LocalDateTime closing) {
+                   DeliveryType deliveryType, LocalTime deliveryClosing) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.deliveryFee = deliveryFee;
-        this.deliveryType = deliveryType;
-        this.closing = closing;
+        this.delivery = Delivery.builder()
+                .closing(deliveryClosing)
+                .type(deliveryType)
+                .fee(deliveryFee)
+                .build();
     }
 
-    public void addOption(@NotNull ProductOption option){
+    public Optional<Integer> getLowestPrice() {
+        return productOptions.stream()
+                .map(ProductOption::getPrice)
+                .min(Integer::compareTo);
+    }
+
+    public void addOptions(@NotNull List<ProductOption> options) {
+        options.forEach(this::addOption);
+    }
+
+    private void addOption(@NotNull ProductOption option) {
         productOptions.add(option);
     }
 
-    public void deleteOption(@NotNull ProductOption option){
+    public void deleteOption(@NotNull ProductOption option) {
         productOptions.remove(option);
     }
 }
