@@ -6,7 +6,9 @@ import lombok.Getter;
 @Getter
 @AllArgsConstructor
 public enum DeliveryType {
-    FAST("당일"),REGULAR("익일");
+    FAST("당일",0),REGULAR("익일",1);
 
-    private final String description;
+    private String description;
+
+    private int sendDate;
 }
