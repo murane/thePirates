@@ -14,7 +14,7 @@ AutoDDL 설정을 사용
 > 1번 docker 컨테이너를 통해 스프링 jar 프로젝트 실행후 Localhost로 요청  
 
 ### POST: /product
-####product 생성 Request.json
+#### product 생성 Request.json
 ```json
 {
   "name": "노르웨이산 연어",
