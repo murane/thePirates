@@ -1,5 +1,7 @@
 package com.example.thepirates.api.dto.request;
 
+import com.example.thepirates.api.dto.ProductSupplierInfo;
+
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.time.LocalTime;
@@ -14,6 +16,6 @@ public class BussinessHourValidator
     public boolean isValid(ProductSupplierInfo value, ConstraintValidatorContext context) {
         LocalTime open = value.getOpen();
         LocalTime close = value.getClose();
-        return !open.isBefore(close) && !open.equals(close);
+        return !open.isAfter(close) && !open.equals(close);
     }
 }
