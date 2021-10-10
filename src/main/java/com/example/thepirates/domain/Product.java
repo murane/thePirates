@@ -14,8 +14,9 @@ import java.util.Optional;
 
 @Entity
 @Getter
+@Table(name="PRODUCT")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Product {
+public class Product extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -36,7 +37,8 @@ public class Product {
 
     @Builder
     public Product(Long id, String name, String description, Integer deliveryFee,
-                   DeliveryType deliveryType, LocalTime deliveryClosing) {
+                   DeliveryType deliveryType, LocalTime deliveryClosing,
+                   LocalTime supplierOpen, LocalTime supplierClose) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -45,12 +47,15 @@ public class Product {
                 .type(deliveryType)
                 .fee(deliveryFee)
                 .build();
+        this.supplierOpen = supplierOpen;
+        this.supplierClose = supplierClose;
     }
 
-    public Optional<Integer> getLowestPrice() {
+    public int getLowestPrice() {
         return productOptions.stream()
                 .map(ProductOption::getPrice)
-                .min(Integer::compareTo);
+                .min(Integer::compareTo)
+                .orElse(0);
     }
 
     public void addOptions(@NotNull List<ProductOption> options) {
