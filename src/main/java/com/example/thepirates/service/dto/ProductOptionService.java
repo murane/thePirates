@@ -1,6 +1,6 @@
 package com.example.thepirates.service.dto;
 
-import com.example.thepirates.api.dto.request.ProductOptionInfo;
+import com.example.thepirates.api.dto.ProductOptionInfo;
 import com.example.thepirates.domain.Product;
 import com.example.thepirates.domain.ProductOption;
 import com.example.thepirates.domain.ProductOptionRepository;

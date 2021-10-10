@@ -1,8 +1,9 @@
-package com.example.thepirates.api.dto.request;
+package com.example.thepirates.api.dto;
 
 import lombok.*;
 
 @Getter
+@EqualsAndHashCode
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class ProductOptionInfo {
     private String name;

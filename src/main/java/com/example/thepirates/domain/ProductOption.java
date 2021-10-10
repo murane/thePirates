@@ -6,11 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.PositiveOrZero;
 
 @Entity
 @Getter
+@Table(name = "PRODUCT_OPTION")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class ProductOption {
+public class ProductOption extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,6 +21,7 @@ public class ProductOption {
 
     private Integer price;
 
+    @PositiveOrZero
     private Integer stock;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

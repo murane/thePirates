@@ -1,5 +1,8 @@
 package com.example.thepirates.api.dto.request;
 
+import com.example.thepirates.api.dto.ProductDeliveryInfo;
+import com.example.thepirates.api.dto.ProductOptionInfo;
+import com.example.thepirates.api.dto.ProductSupplierInfo;
 import lombok.*;
 
 import javax.validation.Valid;

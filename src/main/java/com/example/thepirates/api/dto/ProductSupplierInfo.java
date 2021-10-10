@@ -1,5 +1,6 @@
-package com.example.thepirates.api.dto.request;
+package com.example.thepirates.api.dto;
 
+import com.example.thepirates.api.dto.request.BussinessHour;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AccessLevel;
 import lombok.Getter;
